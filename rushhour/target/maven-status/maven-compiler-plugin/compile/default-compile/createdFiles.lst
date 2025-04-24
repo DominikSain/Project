@@ -1,8 +1,11 @@
-view\App.class
 model\RushHour.class
 model\RushHourObserver.class
+model\Vehicle.class
+model\Backtracker.class
+view\App.class
 model\Move.class
 model\Position.class
-model\Vehicle.class
+model\RushHour$1.class
+model\RushHourSolver.class
 model\RushHourException.class
 model\Direction.class

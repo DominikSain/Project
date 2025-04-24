@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** @author Dominik Sain */
 public class Vehicle {
     private char id;
@@ -49,4 +52,24 @@ public class Vehicle {
             }
         }
     }
+    public List<Position> getOccupiedPositions() {
+    List<Position> positions = new ArrayList<>();
+    Position back = getBack();
+    int size = 2;
+
+    if (isHorizontal()) {
+        int row = back.getRow();
+        int startCol = back.getCol();
+        for (int i = 0; i < size; i++) {
+            positions.add(new Position(row, startCol + i));
+        }
+    } else { // vertical
+        int col = back.getCol();
+        int startRow = back.getRow();
+        for (int i = 0; i < size; i++) {
+            positions.add(new Position(startRow + i, col));
+        }
+    }
+    return positions;
+}
 }

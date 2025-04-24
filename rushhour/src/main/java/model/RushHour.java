@@ -8,7 +8,31 @@ public class RushHour {
     private final List<RushHourObserver> observers = new ArrayList<>();
     private int moveCount = 0;
 
-    public RushHour() {}
+    public RushHour() {
+
+    }
+
+    public RushHour(RushHour other) {
+        this.moveCount = other.moveCount;
+        for (Vehicle original : other.vehicles) {
+            Position backCopy = new Position(
+                original.getBack().getRow(),
+                original.getBack().getCol()
+            );
+            Position frontCopy = new Position(
+                original.getFront().getRow(),
+                original.getFront().getCol()
+            );
+            
+            Vehicle vehicleCopy = new Vehicle(
+                original.getId(),
+                backCopy,
+                frontCopy
+            );
+            this.vehicles.add(vehicleCopy);
+        }
+
+    }
 
     public void addObserver(RushHourObserver observer) {
         observers.add(observer);

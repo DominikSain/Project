@@ -72,14 +72,36 @@ public class App extends Application {
         Button downButton = new Button("Down");
         Button leftButton = new Button("Left");
         Button rightButton = new Button("Right");
+        Button solve = new Button("Solve");
 
         // setting up button actions
         upButton.setOnAction(e -> moveVehicle(Direction.UP)); 
         downButton.setOnAction(e -> moveVehicle(Direction.DOWN));
         leftButton.setOnAction(e -> moveVehicle(Direction.LEFT));
         rightButton.setOnAction(e -> moveVehicle(Direction.RIGHT));
+        solve.setOnAction(e -> {
+            try {
+                RushHourSolver initial = new RushHourSolver(game);
+                Backtracker backtracker = new Backtracker(true);
+                RushHourSolver solution = backtracker.solve(initial);
+        
+                if (solution != null) {
+                    game = solution.RushHour();  // Assuming RushHourSolver has a method .rushHour() that returns a RushHour object
+                    updateBoard();
+                    moveCountLabel.setText("Moves: " + game.getMoveCount());
+                    displayGameStatus("Solved the puzzle!");
+                } else {
+                    displayGameStatus("No solution found.");
+                }
+            } catch (RushHourException ex) {
+                displayGameStatus("Error while solving: " + ex.getMessage());
+            }
+        });
+        
+        
 
-        buttonBox.getChildren().addAll(upButton, downButton, leftButton, rightButton);
+
+        buttonBox.getChildren().addAll(upButton, downButton, leftButton, rightButton,solve);
 
         // add all components
         root.getChildren().addAll(statusLabel, moveCountLabel, gameBoard, buttonBox);
